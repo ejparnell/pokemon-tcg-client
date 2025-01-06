@@ -33,3 +33,27 @@ export const signin = async (data) => {
     localStorage.setItem('token', responseData.token)
     return responseData
 }
+
+export const verify = async () => {
+    const token = localStorage.getItem('token')
+    if (!token) return null
+
+    try {
+        const response = await fetch(`${BACKEND_URL}/api/users/verify`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+
+        if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem('token')
+            }
+            return null
+        }
+
+        const responseData = await response.json()
+        return responseData
+    } catch (error) {
+        console.error('Error verifying user:', error)
+        return null
+    }
+}

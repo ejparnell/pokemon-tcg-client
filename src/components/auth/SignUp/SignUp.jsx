@@ -29,7 +29,7 @@ export default function SignUp() {
         }))
     }
 
-    const handleSumbit = async (event) => {
+    async function handleSumbit(event) {
         event.preventDefault()
         setLoading(true)
         setError(null)
