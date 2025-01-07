@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ProfileContentContainer = styled.div`
+export const HomeContentContainer = styled.div`
     margin-bottom: 50px;
     padding: 16px;
     height: calc(100vh - 50px);

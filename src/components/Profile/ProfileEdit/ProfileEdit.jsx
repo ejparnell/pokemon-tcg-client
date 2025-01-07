@@ -24,7 +24,7 @@ const pokemonGreetings = [
     'Channel your inner Pikachu and spark some fun!'
 ]
 
-export default function ProfileEdit({ profile, setIsEditing, setUser }) {
+export default function ProfileEdit({ profile, setIsEditingProfile, setUser }) {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -83,7 +83,7 @@ export default function ProfileEdit({ profile, setIsEditing, setUser }) {
                 </FormSelect>
                 <Button type='submit' disabled={loading}>{loading ? 'Submitting...' : 'Save'}</Button>
             </Form>
-            <Button onClick={() => setIsEditing(false)}>Back to Profile</Button>
+            <Button onClick={() => setIsEditingProfile(false)}>Back to Profile</Button>
         </div>
     )
 }

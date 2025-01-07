@@ -57,3 +57,31 @@ export const verify = async () => {
         return null
     }
 }
+
+export const updateUser = async (data) => {
+    const token = localStorage.getItem('token')
+    if (!token) throw new Error('Not authenticated')
+
+    const response = await fetch(`${BACKEND_URL}/api/users/update`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+
+    if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to update user')
+    }
+
+    const responseData = await response.json()
+    return responseData
+}
+
+export const logout = (setUser, navigate) => {
+    localStorage.removeItem('token')
+    navigate('/')
+    setUser(null)
+}

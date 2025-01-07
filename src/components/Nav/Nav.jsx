@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { UserContext } from '../../contexts/UserProvider'
-import { logout } from '../../utils/logout'
 
 import { NavContainer, NavUl, NavLi } from './NavStyles'
 
@@ -18,9 +17,6 @@ export default function Nav() {
                     </NavLi>
                     <NavLi>
                         <Link to='/profile'>Profile</Link>
-                    </NavLi>
-                    <NavLi onClick={() => logout(setUser)}>
-                        Sign Out
                     </NavLi>
                 </> : <>
                     <NavLi>
