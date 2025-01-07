@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
-    const publicPaths = ['/', '/signup', '/signin']
+    const publicPaths = ['/', '/signup', '/signin', '/battle']
 
     useEffect(() => {
         async function verifyUser() {

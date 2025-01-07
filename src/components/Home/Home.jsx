@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
+import { Link } from 'react-router-dom'
 
 import { fetchCards } from '../../utils/cardServices'
 import { sets, types, rarities } from './HomeConstants'
 import { UserContext } from '../../contexts/UserProvider'
 
-import Nav from '../Nav/Nav'
 import H1 from '../common/H1/H1'
 import PokemonCard from '../common/PokemonCard/PokemonCard'
 import Button from '../common/Button/Button'
@@ -72,21 +72,31 @@ export default function Home() {
     }
     
     function handleToggleOwned() {
-        setToggleOwned((prev) => !prev)
         const ownedCardIds = new Set(ownedCards.map((card) => card._id))
         const updatedCards = allCards.map((card) => ({
             ...card,
             isOwned: ownedCardIds.has(card._id)
         }))
-
+    
         setMarkedOwnedCards(updatedCards)
-        setCurrentCards(updatedCards)
+    
+        setToggleOwned((prev) => {
+            const newToggleState = !prev
+    
+            if (newToggleState) {
+                setCurrentCards(updatedCards.filter((card) => card.isOwned))
+            } else {
+                setCurrentCards(allCards)
+            }
+    
+            return newToggleState
+        })
     }
+    
     
 
     return (
         <div>
-            <Nav />
             <HomeContentContainer>
                 <H1>Home</H1>
                 {error && <div>{Object.values(error)}</div>}
@@ -117,7 +127,9 @@ export default function Home() {
                 </Form>
 
                 {currentCards.map((card) => (
-                    <PokemonCard key={card._id} pokemon={card} />
+                    <Link key={card._id} to={`/cards/${card._id}`}>
+                        <PokemonCard pokemon={card} />
+                    </Link>
                 ))}
             </HomeContentContainer>
         </div>

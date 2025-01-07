@@ -18,6 +18,18 @@ export default function Nav() {
                     <NavLi>
                         <Link to='/profile'>Profile</Link>
                     </NavLi>
+                    <NavLi>
+                        <Link to='/booster-packs'>Booster Packs</Link>
+                    </NavLi>
+                    <NavLi>
+                        <Link to='/decks'>Decks</Link>
+                    </NavLi>
+                    <NavLi>
+                        <Link to='/trades'>Trades</Link>
+                    </NavLi>
+                    <NavLi>
+                        <Link to='/battle'>Battle</Link>
+                    </NavLi>
                 </> : <>
                     <NavLi>
                         <Link to='/'>Home</Link>
@@ -27,6 +39,9 @@ export default function Nav() {
                     </NavLi>
                     <NavLi>
                         <Link to='/signin'>Sign In</Link>
+                    </NavLi>
+                    <NavLi>
+                        <Link to='/battle'>Battle</Link>
                     </NavLi>
                 </>}
             </NavUl>

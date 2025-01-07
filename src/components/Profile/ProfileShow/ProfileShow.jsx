@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import Text from '../../common/Text/Text'
 import AvatarImage from '../../common/AvatarImage/AvatarImage'
 import Button from '../../common/Button/Button'
@@ -15,10 +17,12 @@ export default function ProfileShow({ profile, setIsEditingProfile }) {
             <Text>Games Played: {profile.gamesPlayed}</Text>
             <Text>Greeting: {profile.greeting}</Text>
             <Button onClick={() => setIsEditingProfile(true)}>Update Profile</Button>
-            {profile.cards.length > 0 ? <>
+            {profile.cards?.length > 0 ? <>
                 <Text>Owned Cards: {profile.cards.length}</Text>
                 {profile.cards.map((card, index) => (
-                    <PokemonCard key={index} pokemon={card} />
+                    <Link to={`/cards/${card._id}`} key={index} >
+                        <PokemonCard pokemon={card} />
+                    </Link>
                 ))}
             </> : <>
                 <Text>No cards yet! Add some cards to your collection!</Text>
