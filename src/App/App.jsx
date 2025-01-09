@@ -10,6 +10,10 @@ import ProfileHome from '../components/Profile/ProfileHome/ProfileHome'
 import PokemonDetail from '../components/PokemonDetail/PokemonDetail'
 import BoosterPackDetail from '../components/BoosterPacks/BoosterPackDetail/BoosterPackDetail'
 import BoosterPacksHome from '../components/BoosterPacks/BoosterPacksHome/BoosterPacksHome'
+import DecksHome from '../components/Decks/DecksHome/DecksHome'
+import DeckCreate from '../components/Decks/DeckCreate/DeckCreate'
+import DeckShow from '../components/Decks/DeckShow/DeckShow'
+import DeckEdit from '../components/Decks/DeckEdit/DeckEdit'
 
 function App() {
 
@@ -23,7 +27,10 @@ function App() {
         <Route path='/cards/:id' element={<PokemonDetail />} />
         <Route path='/booster-packs/:set' element={<BoosterPackDetail />} />
         <Route path='/booster-packs' element={<BoosterPacksHome />} />
-        <Route path='/decks' element={<div>Decks</div>} />
+        <Route path='/decks' element={<DecksHome />} />
+        <Route path='/decks/create' element={<DeckCreate />} />
+        <Route path='/decks/:id' element={<DeckShow />} />
+        <Route path='/decks/:id/edit' element={<DeckEdit />} />
         <Route path='/trades' element={<div>Trades</div>} />
         <Route path='/battle' element={<div>Battle</div>} />
         <Route path='*' element={<div>Not Found</div>} />
