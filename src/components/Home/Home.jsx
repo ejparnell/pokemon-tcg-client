@@ -11,7 +11,6 @@ import Button from '../common/Button/Button'
 import Form from '../common/Form/Form'
 import FormInput from '../common/FormInput/FormInput'
 import Text from '../common/Text/Text'
-import { HomeContentContainer } from './HomeStyles'
 
 export default function Home() {
     const { user } = useContext(UserContext)
@@ -70,68 +69,66 @@ export default function Home() {
         setSearch(event.target.value)
         setCurrentCards(allCards.filter((card) => card.name.toLowerCase().includes(event.target.value.toLowerCase())))
     }
-    
+
     function handleToggleOwned() {
         const ownedCardIds = new Set(ownedCards.map((card) => card._id))
         const updatedCards = allCards.map((card) => ({
             ...card,
             isOwned: ownedCardIds.has(card._id)
         }))
-    
+
         setMarkedOwnedCards(updatedCards)
-    
+
         setToggleOwned((prev) => {
             const newToggleState = !prev
-    
+
             if (newToggleState) {
                 setCurrentCards(updatedCards.filter((card) => card.isOwned))
             } else {
                 setCurrentCards(allCards)
             }
-    
+
             return newToggleState
         })
     }
-    
-    
+
+
 
     return (
         <div>
-            <HomeContentContainer>
-                <H1>Home</H1>
-                {error && <div>{Object.values(error)}</div>}
-                <Button onClick={() => setCurrentCards(allCards)}>All Cards</Button>
-                {user && <Button onClick={handleToggleOwned}>Owned Cards Overlay</Button>}
+            <H1>Home</H1>
+            {error && <div>{Object.values(error)}</div>}
+            <Button onClick={() => setCurrentCards(allCards)}>All Cards</Button>
+            {user && <Button onClick={handleToggleOwned}>Owned Cards Overlay</Button>}
 
-                <Text>Filter by Set</Text>
-                {sets.map((item) => (
-                    <Button key={item.set} onClick={(event) => handleChangeCards(event, 'set')}>
-                        {item.name}
-                    </Button>
-                ))}
-                <Text>Filter by Type</Text>
-                {types.map((item) => (
-                    <Button key={item.type} onClick={(event) => handleChangeCards(event, 'type')}>
-                        {item.name}
-                    </Button>
-                ))}
-                <Text>Filter by Rarity</Text>
-                {rarities.map((item) => (
-                    <Button key={item.rarity} onClick={(event) => handleChangeCards(event, 'rarity')}>
-                        {item.name}
-                    </Button>
-                ))}
+            <Text>Filter by Set</Text>
+            {sets.map((item) => (
+                <Button key={item.set} onClick={(event) => handleChangeCards(event, 'set')}>
+                    {item.name}
+                </Button>
+            ))}
+            <Text>Filter by Type</Text>
+            {types.map((item) => (
+                <Button key={item.type} onClick={(event) => handleChangeCards(event, 'type')}>
+                    {item.name}
+                </Button>
+            ))}
+            <Text>Filter by Rarity</Text>
+            {rarities.map((item) => (
+                <Button key={item.rarity} onClick={(event) => handleChangeCards(event, 'rarity')}>
+                    {item.name}
+                </Button>
+            ))}
 
-                <Form>
-                    <FormInput label='Search Name' type='text' name='search' value={search} onChange={handleSearchChange} />
-                </Form>
+            <Form>
+                <FormInput label='Search Name' type='text' name='search' value={search} onChange={handleSearchChange} />
+            </Form>
 
-                {currentCards.map((card) => (
-                    <Link key={card._id} to={`/cards/${card._id}`}>
-                        <PokemonCard pokemon={card} />
-                    </Link>
-                ))}
-            </HomeContentContainer>
+            {currentCards.map((card) => (
+                <Link key={card._id} to={`/cards/${card._id}`}>
+                    <PokemonCard pokemon={card} />
+                </Link>
+            ))}
         </div>
     )
 }
